@@ -1,0 +1,55 @@
+.menu-button {
+		width:30%;
+		font-size: 150%;
+		margin-left:auto;
+		margin-right:auto;
+		background: #FF6A00;
+}
+
+body {
+	background-color:#add8e6;
+}
+
+h1 {
+  font-size: 40px;
+  text-align: center;
+  color: darkblue;
+  line-height: 48px;
+  float: center;
+}
+
+img {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+#admin-button{
+	width:15%;
+	font-size: 100%;
+	float:left;
+	margin-left:5%;
+	background: #134EA7;
+}
+
+.wrap{
+	display:none;	
+}
+
+.jpanel-ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #9AB0B9;
+	border: 1px solid #555;
+	font-size: 125%
+}
+
+.jpanel-li {
+    text-align: right;
+	height: 5%;
+}
+
+input {
+	width: 72%;
+}

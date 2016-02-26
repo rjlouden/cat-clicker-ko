@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+	<meta charset="utf-8">
+	<title>Cat Clicker</title>
+	
+	<link href="css/styles.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	 <script src="http://jpanelmenu.com/js/lib/jquery.jpanelmenu.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script type='text/javascript' src='js/knockout-3.4.0.js'></script>
+	<script src="js/cats-ko.js"></script>
+</HEAD>
+<BODY>
+
+<div data-bind="with: currentCat()">
+	<div data-bind="foreach: catList()" class="btn-group-justified col-12" style="text-align:center"> 
+		<button type="button" class="menu-button" data-bind="click: catMenuClick"><div data-bind="text: catName"></div></button>
+	</div>
+	
+	<H1 data-bind="text: catName"></H1>
+	<H2 data-bind="text: stage"></H2>
+	<H3 data-bind="text: clicked"></H3>
+	<img data-bind="click: incrementClicked, attr: {src: image}" src=""> 
+
+	<H3>Nicknames:</H3>
+	<div>
+		<ul data-bind="foreach: nicknames">
+			<li data-bind="text: $data"></li>
+		</ul>
+	</div>
+	
+	<div class="row">
+		<div class="wrap">
+			<ul id="menu" class="jpanel-ul">
+				<li class="jpanel-li"><H2>Cat Details</H2></li>
+				<li class="jpanel-li">Name:<input id="catNameInputID" type="text" name="cat-name-input"></li>
+				<li class="jpanel-li">URL:<input id="catURLInputID" type="text" name="cat-url-input"></li>
+				<li class="jpanel-li">Clicked:<input id="catClickedInputID" type="text" name="clicked-input"></li>
+				<li class="jpanel-li"><button id="save" type="button" >Save</button><button id="reset" type="button" >Reset</button></li>
+			</ul>
+		</div>
+	</div>
+	<button id="admin-button" class="menu-trigger" type="button" >Admin</button>
+</div>
+</BODY>
+</HTML>
+
+<!--<H3>Nicknames:</H3?
+<ul data-bind="foreach: nicknames">
+	<li data-bind="text: name">1</li>
+</ul>-->
+
+<!--
+		<ul data-bind="foreach: catList()">
+			<li data-bind="text: catName"></li>
+		</ul>
+
+		<div data-bind="foreach: catList()">
+			<label>
+			<input type="radio" value="Alpha" data-bind="text: catName" />
+			<span data-bind="text: catName"></span>
+			</label>
+		</div>-->
