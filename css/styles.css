@@ -52,10 +52,14 @@ img {
 	text-align:right;
 }
 
-h2 {
+.menuH2 {
 	text-align: center;
 }
 
+.bodyText {
+	 color: darkblue;
+/*	 text-align: center;*/
+}
 /*input {
 	width: 72%;
 }
