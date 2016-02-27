@@ -12,10 +12,34 @@
 </HEAD>
 <BODY>
 
-<div data-bind="with: currentCat()" id="main">
-	<div data-bind="foreach: catList()" class="btn-group-justified col-12" style="text-align:center"> 
+<div data-bind="with: currentCat()" id="main" style="display:flex">
+	<div id="menu" class="hidden">
+		<ul class="jpanel-ul">
+			<H2>Cat Details</H2>
+			<li class="menu-li">
+				<label style="float:left">Name:</label>
+				<input id="catNameInputID" type="text" name="cat-name-input" style="">
+			</li>
+			<li class="menu-li">
+				<label style="float:left">URL:</label>
+				<input id="catURLInputID" type="text" name="cat-url-input" style="">
+			</li>
+			<li class="menu-li">
+				<label style="float:left">Clicked:</label>
+				<input id="catClickedInputID" type="text" name="clicked-input" style="">
+			</li>
+			<li style="float: right">
+				<button id="save" type="button">Save</button><button id="reset" type="button" >Reset</button>
+			</li>
+		</ul>				
+	</div>
+
+
+	<div class="">
+	<div data-bind="foreach: catList()" class="btn-group-justified" style="text-align:center"> 
 		<button type="button" class="menu-button" data-bind="click: catMenuClick"><div data-bind="text: catName"></div></button>
 	</div>
+	
 	
 	<H1 data-bind="text: catName"></H1>
 	<H2 data-bind="text: stage"></H2>
@@ -28,24 +52,14 @@
 			<li data-bind="text: $data"></li>
 		</ul>
 	</div>
-	
-	<div class="row">
-		<div class="wrap">
-			<form id="menu" data-bind="data-bind="submit: $parent.updateCat">
-			<ul  class="jpanel-ul">
-				<li class="jpanel-li" ><H2>Cat Details</H2></li>
-				<li class="jpanel-li" data-bind="textInput: currentCat().catName">Name:<input id="catNameInputID" type="text" name="cat-name-input"></li>
-				<li class="jpanel-li">URL:<input id="catURLInputID" type="text" name="cat-url-input"></li>
-				<li class="jpanel-li">Clicked:<input id="catClickedInputID" type="text" name="clicked-input"></li>
-			</ul>
-				<span class="jpanel-li"><button id="save" type="submit">Save</button><button id="reset" type="button" >Reset</button></span>
-			</form>
-		</div>
-	</div>
 	<button id="admin-button" class="menu-trigger" type="button" >Admin</button>
+	</div>
+	
 </div>
 </BODY>
 </HTML>
+
+<!--data-bind="textInput: currentCat().catName"-->
 
 <!--<H3>Nicknames:</H3?
 <ul data-bind="foreach: nicknames">

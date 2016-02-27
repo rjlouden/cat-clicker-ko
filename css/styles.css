@@ -38,18 +38,38 @@ img {
 
 .jpanel-ul {
     list-style-type: none;
-    margin: 0;
-    padding: 0;
-    background-color: #9AB0B9;
-	border: 1px solid #555;
-	font-size: 125%
+	font-size: 125%;
 }
 
+.menu-li {
+	display:flex;
+	justify-content:space-between;
+	padding-bottom: 5px;
+}
 .jpanel-li {
-    text-align: right;
 	height: 5%;
+	padding-bottom: 20px;
+	text-align:right;
 }
 
-input {
+h2 {
+	text-align: center;
+}
+
+/*input {
 	width: 72%;
+}
+
+.panel{
+	width: 73%;
+}*/
+
+#menu{
+	float:left;
+	background-color: #9AB0B9
+}
+
+.hidden{
+	visibility:hidden;
+	width: 0;
 }

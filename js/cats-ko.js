@@ -81,35 +81,99 @@ var viewModel = function(){
 	});
 	
 	this.currentCat = ko.observable (this.catList()[0]);
-	this.currentCat.extend({notify:'always'});
+	//console.log(this.currentCat().catName());
+	//this.currentCat.extend({notify:'always'});
 	
 	this.incrementClicked = function(){
 		this.clicked(this.clicked()+1);
 	}
 
+	//this.currentCat().clicked.subscribe(function(newValue){
+	//	console.log("s2");
+	//	if(viewAdmin.jPM.isOpen()){
+	//		console.log("subscribed");
+	//		//viewAdmin.render();
+	//	}
+	//});
+	
 	this.catMenuClick = function(clickedCat){
 		currentCat(clickedCat);
-	}
-}
-
-var viewAdmin = {
+	};
+	
+/*var viewAdmin = {
 	init: function(){
 		this.jPM = $.jPanelMenu({
 				openPosition: "23%",
-				closeOnContentClick: false//,
-		//		afterOpen: function(){
-		//		viewAdmin.render();
-		//		viewMenu.updatePanel(true);
-		//		viewCat.updatePanel(true);
-		//	},
-		//	afterClose: function(){
-		//		viewMenu.updatePanel(false);
-		//		viewCat.updatePanel(false);
-		//	}
+				closeOnContentClick: false,
+				afterOpen: function(){
+				viewAdmin.render();
+				viewAdmin.updatePanel(true);
+			},
+			afterClose: function(){
+				viewAdmin.updatePanel(false);
+			}
 		});
-        this.jPM.on();	
+        this.jPM.on();
+
+		this.catName = document.getElementsByName("cat-name-input")[1];
+		this.catURL = document.getElementsByName("cat-url-input")[1];
+		this.catClicked = document.getElementsByName("clicked-input")[1];		
+	},
+	"updatePanel": function (inPanel){
+		if(inPanel) {
+			$("#main").addClass('panel'); }
+		else {
+			$("#main").removeClass('panel');
+		}
+	},
+	render: function(){
+	var thisCat=self.currentCat();
+
+	$("button#save").click(function(event){ viewAdmin.saveEvent()});
+	$("button#reset").click(function(event){ viewAdmin.render()});	
+
+	viewAdmin.catName.value=thisCat.catName();
+	viewAdmin.catURL.value=thisCat.image();
+	viewAdmin.catClicked.value=thisCat.clicked();
+		
+	},
+	saveEvent: function(){
+		var thisCat=self.currentCat();
+		
+		if (thisCat.catName() !== this.catName.value || 
+		thisCat.image() !== this.catURL.value || 
+		thisCat.clicked() !== this.catClicked.value){
+			if (/^[0-9]+$/.test(this.catClicked.value, 10)){
+				thisCat.catName(this.catName.value);
+				thisCat.image(this.catURL.value);
+				thisCat.clicked(this.catClicked.value); 
+			}
+			
+		}
 	}
+}
+*/
+//viewAdmin.init();
 };
+
+var viewAdmin={
+	init: function(){
+		this.show = false;
+		$("button#admin-button").click(function(event){ viewAdmin.toggleMenu()});
+	},
+	toggleMenu: function(){
+		if (this.show){
+			this.show=false
+			$("#menu").addClass('hidden');
+		}
+		else {
+			this.show=true
+			$("#menu").removeClass('hidden');
+		}
+	}
+}
+
+
 $(document).ready(function(){
 		viewAdmin.init();
 		ko.applyBindings(viewModel);
