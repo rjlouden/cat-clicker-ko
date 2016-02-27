@@ -12,35 +12,36 @@
 </HEAD>
 <BODY>
 
-<div data-bind="with: currentCat()" id="main" style="display:flex">
+<div id="main" style="display:flex">
 	<div id="menu" class="hidden">
 		<ul class="jpanel-ul">
 			<H2>Cat Details</H2>
 			<li class="menu-li">
 				<label style="float:left">Name:</label>
-				<input id="catNameInputID" type="text" name="cat-name-input" style="">
+				<input data-bind="value: inputName" type="text" name="cat-name-input" style="">
 			</li>
 			<li class="menu-li">
 				<label style="float:left">URL:</label>
-				<input id="catURLInputID" type="text" name="cat-url-input" style="">
+				<input data-bind="value: inputURL" type="text" name="cat-url-input" style="">
 			</li>
 			<li class="menu-li">
 				<label style="float:left">Clicked:</label>
-				<input id="catClickedInputID" type="text" name="clicked-input" style="">
+				<input data-bind="value: inputClicked"  type="text" name="clicked-input" style="">
 			</li>
 			<li style="float: right">
-				<button id="save" type="button">Save</button><button id="reset" type="button" >Reset</button>
+				<button id="save" type="button" data-bind="click: saveClick">Save</button>
+				<button id="reset" type="button" data-bind="click: resetClick">Reset</button>
 			</li>
 		</ul>				
 	</div>
 
-
-	<div class="">
+<!--data-bind="with: currentCat()"-->
+	<div >
 	<div data-bind="foreach: catList()" class="btn-group-justified" style="text-align:center"> 
 		<button type="button" class="menu-button" data-bind="click: catMenuClick"><div data-bind="text: catName"></div></button>
 	</div>
 	
-	
+	<div data-bind="with: currentCat()"> 
 	<H1 data-bind="text: catName"></H1>
 	<H2 data-bind="text: stage"></H2>
 	<H3 data-bind="text: clicked"></H3>
@@ -51,7 +52,7 @@
 		<ul data-bind="foreach: nicknames">
 			<li data-bind="text: $data"></li>
 		</ul>
-	</div>
+	</div></div>
 	<button id="admin-button" class="menu-trigger" type="button" >Admin</button>
 	</div>
 	

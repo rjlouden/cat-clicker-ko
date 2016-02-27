@@ -40,14 +40,9 @@ var initialCats = [
 var Cat = function(thisCat){
 	this.catName= ko.observable(thisCat.name);
     this.image = ko.observable(thisCat.image);
-	this.clicked= ko.observable(0);
+	this.clicked= ko.observable(thisCat.timesClicked);
 	this.nicknames = ko.observableArray(thisCat.nickNames);
-/*	nicknames = ko.observableArray([
-	{"name": "huggy"},
-	{"name":"lovey"},
-	{"name":"family"},
-	{"name":"sisters"}]); 
-*/	
+
 	this.stage = ko.computed(function(){
 		var clicks = this.clicked();
 		if (clicks <10) {
@@ -62,7 +57,7 @@ var Cat = function(thisCat){
 		else if (clicks <200){
 			return ("Teen")
 		}
-		else if (click < 500){
+		else if (clicks < 500){
 			return ("Adult")
 		}
 		else {
@@ -74,86 +69,43 @@ var Cat = function(thisCat){
 var viewModel = function(){
 	var self = this; //alows you to access variables out side of incrementClicked within viewModel.
 	
-	this.catList = ko.observableArray([]);
+	self.catList = ko.observableArray([]);
 	
 	initialCats.forEach(function(catItem){
 		self.catList.push(new Cat(catItem));
 	});
 	
-	this.currentCat = ko.observable (this.catList()[0]);
-	//console.log(this.currentCat().catName());
-	//this.currentCat.extend({notify:'always'});
+	currentCat = ko.observable (this.catList()[0]);
 	
-	this.incrementClicked = function(){
-		this.clicked(this.clicked()+1);
-	}
+	this.inputName = ko.observable(this.currentCat.peek().catName.peek());
+	this.inputURL = ko.observable(this.currentCat.peek().image.peek());
+	this.inputClicked = ko.observable(this.currentCat.peek().clicked.peek());
 
-	//this.currentCat().clicked.subscribe(function(newValue){
-	//	console.log("s2");
-	//	if(viewAdmin.jPM.isOpen()){
-	//		console.log("subscribed");
-	//		//viewAdmin.render();
-	//	}
-	//});
+	self.incrementClicked = function(){
+		currentCat().clicked(currentCat().clicked()+1);
+	}
 	
 	this.catMenuClick = function(clickedCat){
 		currentCat(clickedCat);
+		
+		self.inputName(self.currentCat.peek().catName.peek());
+		self.inputURL(self.currentCat.peek().image.peek());
+		self.inputClicked(self.currentCat.peek().clicked.peek());
 	};
 	
-/*var viewAdmin = {
-	init: function(){
-		this.jPM = $.jPanelMenu({
-				openPosition: "23%",
-				closeOnContentClick: false,
-				afterOpen: function(){
-				viewAdmin.render();
-				viewAdmin.updatePanel(true);
-			},
-			afterClose: function(){
-				viewAdmin.updatePanel(false);
-			}
-		});
-        this.jPM.on();
-
-		this.catName = document.getElementsByName("cat-name-input")[1];
-		this.catURL = document.getElementsByName("cat-url-input")[1];
-		this.catClicked = document.getElementsByName("clicked-input")[1];		
-	},
-	"updatePanel": function (inPanel){
-		if(inPanel) {
-			$("#main").addClass('panel'); }
-		else {
-			$("#main").removeClass('panel');
-		}
-	},
-	render: function(){
-	var thisCat=self.currentCat();
-
-	$("button#save").click(function(event){ viewAdmin.saveEvent()});
-	$("button#reset").click(function(event){ viewAdmin.render()});	
-
-	viewAdmin.catName.value=thisCat.catName();
-	viewAdmin.catURL.value=thisCat.image();
-	viewAdmin.catClicked.value=thisCat.clicked();
-		
-	},
-	saveEvent: function(){
-		var thisCat=self.currentCat();
-		
-		if (thisCat.catName() !== this.catName.value || 
-		thisCat.image() !== this.catURL.value || 
-		thisCat.clicked() !== this.catClicked.value){
-			if (/^[0-9]+$/.test(this.catClicked.value, 10)){
-				thisCat.catName(this.catName.value);
-				thisCat.image(this.catURL.value);
-				thisCat.clicked(this.catClicked.value); 
-			}
-			
+	this.saveClick = function(){
+		self.currentCat().catName(self.inputName.peek());
+		self.currentCat().image(self.inputURL.peek());
+		if(/^[0-9]+$/.test(self.inputClicked.peek(), 10)){
+			self.currentCat().clicked(self.inputClicked.peek());
 		}
 	}
-}
-*/
-//viewAdmin.init();
+	
+	this.resetClick = function(){
+		self.inputName(self.currentCat.peek().catName.peek());
+		self.inputURL(self.currentCat.peek().image.peek());
+		self.inputClicked(self.currentCat.peek().clicked.peek());
+	}
 };
 
 var viewAdmin={
