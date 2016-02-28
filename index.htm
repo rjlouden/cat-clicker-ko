@@ -14,43 +14,43 @@
 
 <div id="main" style="display:flex">
 	<div id="menu" class="hidden">
-		<ul class="jpanel-ul">
+		<ul class="admin-ul" data-bind="with: inputCat()">
 			<H2 class="menuH2">Cat Details</H2>
 			<li class="menu-li">
-				<label style="float:left">Name:</label>
-				<input data-bind="value: inputName" type="text" name="cat-name-input" style="">
+				<label class="label-text">Name:</label>
+				<input data-bind="value: catName" type="text" name="cat-name-input">
 			</li>
 			<li class="menu-li">
-				<label style="float:left">URL:</label>
-				<input data-bind="value: inputURL" type="text" name="cat-url-input" style="">
+				<label class="label-text">URL:</label>
+				<input data-bind="value: image" type="text" name="cat-url-input">
 			</li>
 			<li class="menu-li">
-				<label style="float:left">Clicked:</label>
-				<input data-bind="value: inputClicked"  type="text" name="clicked-input" style="">
+				<label class="label-text">Clicked:</label>
+				<input data-bind="value: clicked"  type="text" name="clicked-input">
 			</li>
 			<li style="float: right">
 				<button id="save" type="button" data-bind="click: saveClick">Save</button>
-				<button id="reset" type="button" data-bind="click: resetClick">Reset</button>
+				<button id="reset" type="button" data-bind="click: updateInputCat">Reset</button>
 			</li>
 		</ul>				
 	</div>
 
 	<div class="body">
-		<div data-bind="foreach: catList()" class="btn-group-justified col-md-12" style="text-align:center"> 
+		<div data-bind="foreach: catList()" class="btn-group-justified" style="text-align:center"> 
 			<button type="button" class="menu-button" data-bind="click: catMenuClick"><div data-bind="text: catName"></div></button>
 		</div>
 	
 		<div data-bind="with: currentCat()"> 
 			<H1 data-bind="text: catName"></H1>
-			<div style="display:flex">
+			<div class="one-row">
 				<img data-bind="click: incrementClicked, attr: {src: image}" src=""> 
 
 				<div style="float:right">
 					<div class="row">
 						<H2 data-bind="text: stage"></H2>
-						<div style="display:flex;float:right">
+						<div style="display:flex">
 							<label>Times Clicked: </label>
-							<span style="float:right;padding-left:5px" data-bind="text: clicked"></span>
+							<span style="padding-left:5px" data-bind="text: clicked"></span>
 						</div>
 					</div>
 					<div class="row" style="padding-top:20px">
@@ -64,9 +64,9 @@
 				</div>
 			</div>
 		</div>
-	<div style="padding-top:10px">
-		<button id="admin-button" class="menu-trigger" type="button" >Admin</button>
-	</div>
+		<div style="padding-top:10px">
+			<button id="admin-button" class="menu-trigger" type="button" >Admin</button>
+		</div>
 	</div>
 </div>
 </BODY>

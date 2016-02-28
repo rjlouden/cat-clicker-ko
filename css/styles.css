@@ -14,14 +14,13 @@ body {
 h1 {
   font-size: 40px;
   text-align: center;
-  color: darkblue;
   line-height: 48px;
   float: center;
 }
 
 img {
-	margin-left: auto;
-	margin-right: auto;
+	/*margin-left: auto;*/)
+	/*margin-right: auto;*/
 	display: block;
 }
 
@@ -33,11 +32,7 @@ img {
 	background: #134EA7;
 }
 
-.wrap{
-	display:none;	
-}
-
-.jpanel-ul {
+.admin-ul {
     list-style-type: none;
 	font-size: 125%;
 }
@@ -47,11 +42,6 @@ img {
 	justify-content:space-between;
 	padding-bottom: 5px;
 }
-.jpanel-li {
-	height: 5%;
-	padding-bottom: 20px;
-	text-align:right;
-}
 
 .menuH2 {
 	text-align: center;
@@ -59,15 +49,7 @@ img {
 
 .bodyText {
 	 color: darkblue;
-/*	 text-align: center;*/
 }
-/*input {
-	width: 72%;
-}
-
-.panel{
-	width: 73%;
-}*/
 
 #menu{
 	float:left;
@@ -82,4 +64,15 @@ img {
 .btn-primary {
 	color: darkblue;
 	background: #9E1111;
+}
+
+.one-row {
+	margin-left: 5%;
+	display:flex;
+	justify-content:space-around;
+	width:90%
+}
+
+.label-text {
+	float:left;
 }

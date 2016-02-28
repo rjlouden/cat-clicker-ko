@@ -69,6 +69,7 @@ var Cat = function(thisCat){
 var viewModel = function(){
 	var self = this; //alows you to access variables out side of incrementClicked within viewModel.
 	
+	//list of cats
 	self.catList = ko.observableArray([]);
 	
 	initialCats.forEach(function(catItem){
@@ -77,45 +78,55 @@ var viewModel = function(){
 	
 	currentCat = ko.observable (this.catList()[0]);
 	
-	this.inputName = ko.observable(this.currentCat.peek().catName.peek());
-	this.inputURL = ko.observable(this.currentCat.peek().image.peek());
-	this.inputClicked = ko.observable(this.currentCat.peek().clicked.peek());
-
-	self.incrementClicked = function(){
+	//Cat in the Admin area.
+	inputCat = ko.observable (new Cat ({
+						name: this.currentCat.peek().catName.peek(),
+						image: this.currentCat.peek().image.peek(),
+						timesClicked: this.currentCat.peek().clicked.peek(),
+						nickNames: this.currentCat.peek().clicked.peek()
+						}));
+	
+	this.incrementClicked = function(){
 		currentCat().clicked(currentCat().clicked()+1);
+		inputCat().clicked(currentCat().clicked.peek());
 	}
 	
 	this.catMenuClick = function(clickedCat, event){
 		currentCat(clickedCat);
 		
-		self.inputName(self.currentCat.peek().catName.peek());
-		self.inputURL(self.currentCat.peek().image.peek());
-		self.inputClicked(self.currentCat.peek().clicked.peek());
+		self.updateInputCat()
 		
-		//var buttons = $("#catButtonGroup").filter(":button");
-		$("button").attr({class:"menu-button"}).addClass('btn-success').removeClass('btn-primary');
-		var thisButton = $("button div:contains("+event.target.innerHTML+")").filter(function(){
-			return $(this).text() == event.target.innerHTML;
-		});
-		thisButton.parent().addClass('btn-primary');
-		
+		self.updatePrimaryButton(event.target.innerHTML);
+
 	};
 	
-	this.saveClick = function(){
-		self.currentCat().catName(self.inputName.peek());
-		self.currentCat().image(self.inputURL.peek());
-		if(/^[0-9]+$/.test(self.inputClicked.peek(), 10)){
-			self.currentCat().clicked(self.inputClicked.peek());
-		}
+	this.updatePrimaryButton = function(catName){
+		$(".menu-button").filter(":button").addClass('btn-success').removeClass('btn-primary');
+
+		var thisButton = $("button div:contains("+catName+")").filter(function(){
+			return $(this).text() == event.target.innerHTML;
+		});
+		thisButton.parent().addClass('btn-primary');	
 	}
 	
-	this.resetClick = function(){
-		self.inputName(self.currentCat.peek().catName.peek());
-		self.inputURL(self.currentCat.peek().image.peek());
-		self.inputClicked(self.currentCat.peek().clicked.peek());
+	//Make inputCat match currentCat
+	this.updateInputCat = function(){
+		self.inputCat().catName(self.currentCat.peek().catName.peek());
+		self.inputCat().image(self.currentCat.peek().image.peek());
+		self.inputCat().clicked(self.currentCat.peek().clicked.peek());
+	}
+	
+	//Update currentCat with inputCat
+	this.saveClick = function(){
+		self.currentCat().catName(self.inputCat().catName.peek());
+		self.currentCat().image(self.inputCat().image.peek());
+		if(/^[0-9]+$/.test(self.inputCat().clicked.peek(), 10)){
+			self.currentCat().clicked(self.inputCat().clicked.peek());
+		}
 	}
 };
 
+//Configure Admin button and panel.
 var viewAdmin={
 	init: function(){
 		this.show = false;
