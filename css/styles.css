@@ -8,6 +8,7 @@
 
 body {
 	background-color:#add8e6;
+	color: darkblue;
 }
 
 h1 {
@@ -76,4 +77,9 @@ img {
 .hidden{
 	visibility:hidden;
 	width: 0;
+}
+
+.btn-primary {
+	color: darkblue;
+	background: #9E1111;
 }

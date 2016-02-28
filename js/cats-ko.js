@@ -85,12 +85,20 @@ var viewModel = function(){
 		currentCat().clicked(currentCat().clicked()+1);
 	}
 	
-	this.catMenuClick = function(clickedCat){
+	this.catMenuClick = function(clickedCat, event){
 		currentCat(clickedCat);
 		
 		self.inputName(self.currentCat.peek().catName.peek());
 		self.inputURL(self.currentCat.peek().image.peek());
 		self.inputClicked(self.currentCat.peek().clicked.peek());
+		
+		//var buttons = $("#catButtonGroup").filter(":button");
+		$("button").attr({class:"menu-button"}).addClass('btn-success').removeClass('btn-primary');
+		var thisButton = $("button div:contains("+event.target.innerHTML+")").filter(function(){
+			return $(this).text() == event.target.innerHTML;
+		});
+		thisButton.parent().addClass('btn-primary');
+		
 	};
 	
 	this.saveClick = function(){
