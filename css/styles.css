@@ -47,13 +47,10 @@ img {
 	text-align: center;
 }
 
-.bodyText {
-	 color: darkblue;
-}
-
 #menu{
 	float:left;
-	background-color: #9AB0B9
+	background-color: #9AB0B9;
+	color: black;
 }
 
 .hidden{
