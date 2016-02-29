@@ -66,20 +66,30 @@ var Cat = function(thisCat){
 	},this);	
 }
 
+/*function updatePrimaryButton(catName){
+	$(".menu-button").filter(":button").removeClass('btn-primary');
+
+	var thisButton = $(".menu-button").filter(":contains('"+catName+"')").filter(function(){
+		return $(this).text() == event.target.innerHTML;
+	});
+
+	thisButton.addClass('btn-primary');
+} */
+
 var viewModel = function(){
 	var self = this; //alows you to access variables out side of incrementClicked within viewModel.
 	
 	//list of cats
-	self.catList = ko.observableArray([]);
+	this.catList = ko.observableArray([]);
 	
 	initialCats.forEach(function(catItem){
 		self.catList.push(new Cat(catItem));
 	});
 	
-	currentCat = ko.observable (this.catList()[0]);
+	this.currentCat = ko.observable (this.catList()[0]);
 	
 	//Cat in the Admin area.
-	inputCat = ko.observable (new Cat ({
+	this.inputCat = ko.observable (new Cat ({
 						name: this.currentCat.peek().catName.peek(),
 						image: this.currentCat.peek().image.peek(),
 						timesClicked: this.currentCat.peek().clicked.peek(),
@@ -96,18 +106,9 @@ var viewModel = function(){
 		
 		self.updateInputCat()
 		
-		self.updatePrimaryButton(event.target.innerHTML);
-
+		$(".menu-button").filter(":button").removeClass('btn-primary');
+		$(event.currentTarget).addClass('btn-primary');
 	};
-	
-	this.updatePrimaryButton = function(catName){
-		$(".menu-button").filter(":button").addClass('btn-success').removeClass('btn-primary');
-
-		var thisButton = $("button div:contains("+catName+")").filter(function(){
-			return $(this).text() == event.target.innerHTML;
-		});
-		thisButton.parent().addClass('btn-primary');	
-	}
 	
 	//Make inputCat match currentCat
 	this.updateInputCat = function(){
@@ -148,4 +149,6 @@ var viewAdmin={
 $(document).ready(function(){
 		viewAdmin.init();
 		ko.applyBindings(viewModel);
+		//Setting initial Primary wouldn't work in viewModel
+		$(($(".menu-button").filter(":button")[0])).addClass('btn-primary');
 });
